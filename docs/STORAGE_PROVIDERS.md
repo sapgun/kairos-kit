@@ -1,30 +1,141 @@
-﻿# KAIROS Storage Providers Guide
+﻿
+KAIROS Storage Providers
 
-KAIROS는 특정 저장소에 종속되지 않습니다.  
-원하는 저장소를 `config/storage.yaml`에서 자유롭게 변경할 수 있습니다.
+KAIROS does not require a specific storage provider.
 
-## 지원 저장소
+Google Drive is optional.
 
-### 1. Local Disk (기본)
-- 가장 빠르고 추천
-- `config/storage.yaml`에서 `provider: local`로 설정
+Users can choose where their assets live.
 
-### 2. Google Drive
-- `provider: google_drive`
-- rclone 또는 Google Drive Desktop 앱 연동 추천
+KAIROS standardizes:
 
-### 3. NAS (Synology, TrueNAS 등)
-- `provider: nas`
-- SMB 공유 폴더 경로 사용 (`\\NAS\share\KAIROS`)
+Folder structure
+Metadata
+Indexing
+Approval workflow
+Naming rules
 
-### 4. S3-compatible (AWS S3, Backblaze B2, Cloudflare R2)
-- `provider: s3`
-- 향후 v0.2에서 rclone 기반 자동 연동 예정
+But the actual storage location belongs to the user.
 
-## 설정 방법
-1. `config/storage.yaml` 수정
-2. `.\scripts\create-asset-library.ps1` 다시 실행 (경로 자동 반영)
-3. Asset Library에 파일을 넣으면 자동으로 지정된 저장소에 저장
+Supported Storage Provider Patterns
+ProviderUse Case
+Local DiskFastest local workflow
+External SSD/HDDLarge media archive
+Google DriveCloud sync and sharing
+OneDriveMicrosoft ecosystem
+DropboxSimple cloud sync
+NASSelf-owned storage
+Synology / TrueNASLong-term home or team server
+S3-compatible StorageScalable remote storage
+Backblaze B2Low-cost offsite backup
+Custom PathAny mounted folder
+Recommended Setups
+Solo Builder
+asset_storage:
+  provider: local
+  primary_path: "D:/KAIROS_ASSET_LIBRARY"
 
-**현재 상태**: local-only (v0.1)
-다음 버전에서 rclone 기반 multi-provider 자동화 예정
+Best for:
+
+Solo builders
+Fast local use
+Early testing
+Google Drive Setup
+asset_storage:
+  provider: google_drive
+  primary_path: "G:/My Drive/KAIROS_ASSET_LIBRARY"
+
+Best for:
+
+Cross-device access
+Easy sharing
+Creator workflows
+
+Warning:
+
+Google Drive is sync, not true backup.
+Use additional backup if files are important.
+
+NAS Setup
+asset_storage:
+  provider: nas
+  primary_path: "\\NAS01\\KAIROS_ASSET_LIBRARY"
+
+Best for:
+
+Large media files
+Long-term archive
+Self-owned infrastructure
+Small teams
+External Drive Setup
+asset_storage:
+  provider: external_drive
+  primary_path: "E:/KAIROS_ASSET_LIBRARY"
+
+Best for:
+
+Video-heavy workflows
+Offline storage
+Large source files
+S3-Compatible Setup
+asset_storage:
+  provider: s3
+  bucket: "kairos-assets"
+  region: "ap-northeast-2"
+  local_cache: "D:/KAIROS_CACHE"
+
+Best for:
+
+Advanced users
+Remote backup
+Team storage
+Scalable archive
+Storage Independence Principle
+
+KAIROS must not depend on a single storage provider.
+
+The user should be able to move from:
+
+Local Disk → Google Drive → NAS → S3
+
+without changing the core workflow.
+
+The provider is replaceable.
+The structure remains stable.
+
+Standard Internal Structure
+
+Regardless of provider, use:
+
+KAIROS_ASSET_LIBRARY/
+  00_Inbox/
+  01_Projects/
+  02_Content/
+  03_Brand/
+  04_Source_Files/
+  08_Exports/
+  90_Metadata/
+  99_Archive/
+Backup Recommendation
+
+A good baseline:
+
+Primary: Local Disk or NAS
+Secondary: Google Drive or External Drive
+Offsite: Backblaze B2 or S3-compatible storage
+
+For most users:
+
+Primary: Local Disk
+Backup: Google Drive or External SSD
+
+For creators:
+
+Primary: External SSD or NAS
+Backup: Cloud or second drive
+
+For sensitive projects:
+
+Primary: Encrypted local storage
+Backup: Encrypted remote backup
+

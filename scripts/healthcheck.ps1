@@ -1,32 +1,116 @@
 ﻿# KAIROS - healthcheck.ps1
-# 시스템 상태 확인 스크립트
+# Basic environment and folder check
 
-Write-Host "🚀 KAIROS Health Check 시작..." -ForegroundColor Green
+param(
+    [string]$VaultPath = "",
+    [string]$AssetPath = ""
+)
 
-# 1. Vault 존재 확인
-$vaultPath = "C:\Users\pro\ObsidianVaults\KAIROS_Vault"
-if (Test-Path $vaultPath) {
-    Write-Host "✅ Obsidian Vault: 정상" -ForegroundColor Green
-} else {
-    Write-Host "❌ Obsidian Vault: 없음" -ForegroundColor Red
+if ([string]::IsNullOrWhiteSpace($VaultPath)) {
+    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\KAIROS_Vault"
 }
 
-# 2. Asset Library 확인
-$assetPath = "D:\KAIROS_ASSET_LIBRARY"
-if (Test-Path $assetPath) {
-    Write-Host "✅ Asset Library: 정상" -ForegroundColor Green
-} else {
-    Write-Host "❌ Asset Library: 없음" -ForegroundColor Red
+if ([string]::IsNullOrWhiteSpace($AssetPath)) {
+    $AssetPath = "D:\KAIROS_ASSET_LIBRARY"
 }
 
-# 3. 핵심 파일 존재 확인
-$files = @("config\storage.yaml", "config\agents.yaml", "config\permission_matrix.yaml")
-foreach ($file in $files) {
-    if (Test-Path $file) {
-        Write-Host "✅ $file : 정상" -ForegroundColor Green
+Write-Host ""
+Write-Host "KAIROS Healthcheck" -ForegroundColor Cyan
+Write-Host "==================" -ForegroundColor Cyan
+Write-Host ""
+
+$script:ok = 0
+$script:warn = 0
+$script:fail = 0
+
+function Check-Path {
+    param(
+        [string]$Label,
+        [string]$Path,
+        [bool]$Required = $true
+    )
+
+    if (Test-Path $Path) {
+        Write-Host "[OK]   $Label -> $Path" -ForegroundColor Green
+        $script:ok++
     } else {
-        Write-Host "❌ $file : 없음" -ForegroundColor Red
+        if ($Required) {
+            Write-Host "[FAIL] $Label missing -> $Path" -ForegroundColor Red
+            $script:fail++
+        } else {
+            Write-Host "[WARN] $Label missing -> $Path" -ForegroundColor Yellow
+            $script:warn++
+        }
     }
 }
 
-Write-Host "`n✅ Health Check 완료" -ForegroundColor Green
+function Check-Command {
+    param(
+        [string]$Label,
+        [string]$Command,
+        [bool]$Required = $false
+    )
+
+    $exists = Get-Command $Command -ErrorAction SilentlyContinue
+
+    if ($exists) {
+        Write-Host "[OK]   $Label available ($Command)" -ForegroundColor Green
+        $script:ok++
+    } else {
+        if ($Required) {
+            Write-Host "[FAIL] $Label not found ($Command)" -ForegroundColor Red
+            $script:fail++
+        } else {
+            Write-Host "[WARN] $Label not found ($Command)" -ForegroundColor Yellow
+            $script:warn++
+        }
+    }
+}
+
+# Core repo files and folders
+Check-Path "Repo README" ".\README.md"
+Check-Path "Config folder" ".\config"
+Check-Path "Docs folder" ".\docs"
+Check-Path "Scripts folder" ".\scripts"
+Check-Path "Obsidian templates" ".\templates\obsidian"
+
+# Scripts
+Check-Path "create-vault.ps1" ".\scripts\create-vault.ps1"
+Check-Path "create-asset-library.ps1" ".\scripts\create-asset-library.ps1"
+Check-Path "install.ps1" ".\scripts\install.ps1" $false
+Check-Path "healthcheck.ps1" ".\scripts\healthcheck.ps1" $false
+
+# Config files
+Check-Path "agents.yaml" ".\config\agents.yaml"
+Check-Path "permission_matrix.yaml" ".\config\permission_matrix.yaml"
+Check-Path "storage.yaml" ".\config\storage.yaml" $false
+
+# User runtime folders
+Check-Path "Obsidian Vault" $VaultPath $false
+Check-Path "Asset Library" $AssetPath $false
+Check-Path "Asset Inbox" (Join-Path $AssetPath "00_Inbox") $false
+Check-Path "Asset Pending Review" (Join-Path $AssetPath "00_Inbox\Pending_Review") $false
+
+# Optional commands
+Check-Command "Git" "git" $true
+Check-Command "Python" "python" $false
+Check-Command "Node.js" "node" $false
+Check-Command "n8n" "n8n" $false
+Check-Command "Ollama" "ollama" $false
+
+Write-Host ""
+Write-Host "Summary" -ForegroundColor Cyan
+Write-Host "-------" -ForegroundColor Cyan
+Write-Host "OK:   $script:ok" -ForegroundColor Green
+Write-Host "WARN: $script:warn" -ForegroundColor Yellow
+Write-Host "FAIL: $script:fail" -ForegroundColor Red
+
+if ($script:fail -gt 0) {
+    Write-Host ""
+    Write-Host "Healthcheck completed with failures." -ForegroundColor Red
+    exit 1
+} else {
+    Write-Host ""
+    Write-Host "Healthcheck completed." -ForegroundColor Green
+    exit 0
+}
