@@ -1,28 +1,102 @@
-﻿KAIROS Roadmap
-v0.1 — Manual Operating System (현재)
+﻿# KAIROS Roadmap
 
-Obsidian Vault + Asset Library 구조
-AI Team Roles & Permission Matrix
-Aether Crew Lite 템플릿
-install.ps1 + docs 완성
+## v0.1 — Manual Operating Kit
 
-v0.2 — Local Router
+Goal:
 
-CLI router + secret_filter
-asset_watcher + metadata_generator
+Use KAIROS manually with Obsidian + Asset Library + Permission Matrix.
 
-v0.3 — Automation Layer
+Done when:
 
-n8n workflow (Daily Brief, Asset Indexer, Weekly Review)
+- `install.ps1` creates a vault and asset library
+- Templates are copied into the vault
+- Sample Aether Crew Lite project exists
+- User can track one project manually
+- User can record one asset in Asset Index
+- Approval Queue can be used manually
 
-v0.4 — Aether Crew Lite Agent
+Status:
 
-실제 agent prompt + Hermes bot
+In progress.
 
-v0.5 — GUI Console
+---
 
-Task routing dashboard
+## v0.2 — Local Router
 
-v1.0 — KAIROS Control Plane
+Goal:
 
-Web dashboard + Policy Engine + OpenClaw/IronClaw adapter
+Add a basic local routing layer.
+
+Planned:
+
+- `router.py`
+- `secret_filter.py`
+- `asset_watcher.py`
+- `metadata_generator.py`
+- routing rules
+- suggested prompts
+
+---
+
+## v0.3 — Automation Layer
+
+Goal:
+
+Add n8n workflow samples and semi-automation.
+
+Planned:
+
+- Daily Project Brief workflow
+- Asset Inbox Indexer workflow
+- Weekly Review workflow
+- Backup Healthcheck workflow
+- Calendar Sync workflow
+
+---
+
+## v0.4 — Aether Crew Lite Agents
+
+Goal:
+
+Turn manual role templates into executable agent workflows.
+
+Planned:
+
+- PO Agent prompt
+- Scrum Master Agent prompt
+- Developer Agent prompt
+- QA Agent prompt
+- Orchestrator Agent prompt
+- Hermes Agent prompt
+- Human-in-the-loop approval flow
+
+---
+
+## v0.5 — KAIROS Console
+
+Goal:
+
+Add a lightweight GUI.
+
+Planned:
+
+- Approval Queue UI
+- Asset Inbox review
+- Project dashboard
+- Routing panel
+
+---
+
+## v1.0 — Human-Controlled AI Workflow OS
+
+Goal:
+
+A stable local-first control plane for multi-AI workflows.
+
+Principles:
+
+- User-owned knowledge
+- Storage independence
+- Human approval for high-impact actions
+- AI tools as workers
+- Markdown-first memory
