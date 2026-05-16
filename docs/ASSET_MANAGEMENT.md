@@ -263,3 +263,27 @@ Credentials
 Sensitive customer data
 
 Use an encrypted vault for sensitive materials.
+
+---
+
+## Register Pending Assets
+
+KAIROS provides a safe registration script:
+
+```powershell
+.\scripts\register-asset.ps1 -Project Aether_Crew_Lite -AssetType Thumbnail -Tool ChatGPT
+
+This script:
+
+Reads files from 00_Inbox/Pending_Review
+Adds pending records to Obsidian Asset Index
+Adds review items to Approval Queue
+Does not rename files
+Does not move files
+Does not delete files
+Does not publish or share files
+
+This follows the KAIROS human-in-the-loop principle.
+
+AI or scripts may suggest and register.
+The user approves before any high-impact action.
