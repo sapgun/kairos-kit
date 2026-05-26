@@ -1,4 +1,4 @@
-﻿# KAIROS Permission Matrix
+# VESPERA Permission Matrix
 
 ## Level 0 — Free
 - 노트 요약, 아이디어 생성, 태그 추천

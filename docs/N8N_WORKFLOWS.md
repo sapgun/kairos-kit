@@ -1,6 +1,6 @@
-﻿# KAIROS n8n Workflows
+# VESPERA n8n Workflows
 
-n8n is the automation layer for KAIROS.
+n8n is the automation layer for VESPERA.
 
 In v0.1, n8n workflows are placeholders and planning templates.
 
@@ -10,12 +10,12 @@ Real workflow execution is planned for v0.3.
 
 ## Role of n8n
 
-n8n should execute actions after the KAIROS approval system allows them.
+n8n should execute actions after the VESPERA approval system allows them.
 
 n8n is not the decision maker.
 
 ```txt
-KAIROS Core decides permission level
+VESPERA Core decides permission level
 Approval Queue waits for human approval
 n8n executes approved workflow
 Obsidian records the result

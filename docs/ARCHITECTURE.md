@@ -1,6 +1,6 @@
-﻿# KAIROS Architecture
+# VESPERA Architecture
 
-KAIROS is a human-controlled, local-first operating structure for multi-AI workflows.
+VESPERA is a human-controlled, local-first operating structure for multi-AI workflows.
 
 It is not a fully autonomous agent.
 
@@ -18,7 +18,7 @@ It is a control layer for:
 
 ## Design Goal
 
-KAIROS exists to prevent fragmentation.
+VESPERA exists to prevent fragmentation.
 
 AI tools can generate ideas, code, images, videos, documents, and research.  
 But the user must own the long-term memory, context, assets, and decisions.
@@ -32,7 +32,7 @@ But the user must own the long-term memory, context, assets, and decisions.
           Final Decision Maker / Root Authority
                            |
                            v
-                    KAIROS Core
+                    VESPERA Core
        Router / Policy / Permission / State / Audit
                            |
       -----------------------------------------------------
@@ -98,7 +98,7 @@ Supported patterns:
 - S3-compatible storage
 - Custom path
 
-KAIROS standardizes folder structure and metadata.  
+VESPERA standardizes folder structure and metadata.  
 It does not force a storage vendor.
 
 ---
@@ -122,7 +122,7 @@ Examples:
 
 ### 4. Project Layer
 
-Aether Crew Lite is the project management squad inside KAIROS.
+Aether Crew Lite is the project management squad inside VESPERA.
 
 It defines:
 
@@ -140,7 +140,7 @@ Future versions may connect them to actual agents.
 
 ### 5. Approval Layer
 
-KAIROS is human-controlled.
+VESPERA is human-controlled.
 
 AI can propose.  
 AI can prepare.  
@@ -157,7 +157,7 @@ But high-impact actions must pass through the Approval Queue.
 Task Created
     |
     v
-KAIROS Core evaluates risk
+VESPERA Core evaluates risk
     |
     +--> Level 0: Free
     |
@@ -187,9 +187,9 @@ Hermes only delivers:
 - Asset review messages
 - Blocker alerts
 
-If Hermes fails, KAIROS still works because state remains in:
+If Hermes fails, VESPERA still works because state remains in:
 
-- KAIROS Core
+- VESPERA Core
 - Obsidian
 - Approval Queue
 - Audit Log
@@ -198,7 +198,7 @@ If Hermes fails, KAIROS still works because state remains in:
 
 ## Storage Independence
 
-KAIROS must not depend on Google Drive or any single provider.
+VESPERA must not depend on Google Drive or any single provider.
 
 The user chooses where assets live.
 
@@ -206,16 +206,16 @@ Examples:
 
 ```txt
 Local:
-D:\KAIROS_ASSET_LIBRARY
+D:\VESPERA_ASSET_LIBRARY
 
 Google Drive:
-G:\My Drive\KAIROS_ASSET_LIBRARY
+G:\My Drive\VESPERA_ASSET_LIBRARY
 
 NAS:
-\\NAS01\KAIROS_ASSET_LIBRARY
+\\NAS01\VESPERA_ASSET_LIBRARY
 ```
 
-KAIROS defines the structure.  
+VESPERA defines the structure.  
 The user controls the storage.
 
 ---

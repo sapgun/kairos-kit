@@ -1,5 +1,5 @@
-﻿# KAIROS - run-first-workflow-test.ps1
-# Runs the first complete KAIROS v0.1 manual workflow test.
+# VESPERA - run-first-workflow-test.ps1
+# Runs the first complete VESPERA v0.1 manual workflow test.
 #
 # Test flow:
 # 1. Healthcheck
@@ -15,16 +15,16 @@
 
 param(
     [string]$Project = "Aether_Crew_Lite",
-    [string]$AssetPath = "D:\KAIROS_ASSET_LIBRARY",
+    [string]$AssetPath = "D:\VESPERA_ASSET_LIBRARY",
     [string]$VaultPath = ""
 )
 
 if ([string]::IsNullOrWhiteSpace($VaultPath)) {
-    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\KAIROS_Vault"
+    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\VESPERA_Vault"
 }
 
 Write-Host ""
-Write-Host "KAIROS First Workflow Test" -ForegroundColor Cyan
+Write-Host "VESPERA First Workflow Test" -ForegroundColor Cyan
 Write-Host "==========================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -56,8 +56,8 @@ function Assert-Path {
 # Paths
 $PendingDir = Join-Path $AssetPath "00_Inbox\Pending_Review"
 $DestinationDir = Join-Path $AssetPath "01_Projects\$Project\02_Images"
-$TestFileName = "kairos-workflow-test-thumbnail.png"
-$ApprovedFileName = "20260516_AetherCrew_Thumbnail_KAIROS_v01_Approved.png"
+$TestFileName = "VESPERA-workflow-test-thumbnail.png"
+$ApprovedFileName = "20260516_AetherCrew_Thumbnail_VESPERA_v01_Approved.png"
 $TestFile = Join-Path $PendingDir $TestFileName
 $ApprovedFile = Join-Path $DestinationDir $ApprovedFileName
 
@@ -83,7 +83,7 @@ if (Test-Path ".\scripts\healthcheck.ps1") {
 Step-Title "Step 2 - Task Intake Logging"
 
 if (Test-Path ".\scripts\log-task.ps1") {
-    & .\scripts\log-task.ps1 -Task "KAIROS first workflow test asset approval" -Project $Project -VaultPath $VaultPath
+    & .\scripts\log-task.ps1 -Task "VESPERA first workflow test asset approval" -Project $Project -VaultPath $VaultPath
 } else {
     Write-Host "[FAIL] log-task.ps1 not found." -ForegroundColor Red
     $fail++
@@ -112,7 +112,7 @@ if (Test-Path $ApprovedFile) {
     Remove-Item $ApprovedFile -Force
 }
 
-"kairos workflow test file" | Out-File -Encoding utf8 $TestFile
+"VESPERA workflow test file" | Out-File -Encoding utf8 $TestFile
 
 Assert-Path "Test asset in Pending_Review" $TestFile
 
@@ -120,7 +120,7 @@ Assert-Path "Test asset in Pending_Review" $TestFile
 Step-Title "Step 5 - Register Asset"
 
 if (Test-Path ".\scripts\register-asset.ps1") {
-    & .\scripts\register-asset.ps1 -AssetPath $AssetPath -VaultPath $VaultPath -Project $Project -AssetType Thumbnail -Tool KAIROS
+    & .\scripts\register-asset.ps1 -AssetPath $AssetPath -VaultPath $VaultPath -Project $Project -AssetType Thumbnail -Tool VESPERA
 } else {
     Write-Host "[FAIL] register-asset.ps1 not found." -ForegroundColor Red
     $fail++
@@ -155,7 +155,7 @@ Step-Title "Step 7 - Write Audit Log"
 if (Test-Path ".\scripts\write-audit-log.ps1") {
     & .\scripts\write-audit-log.ps1 `
         -Project $Project `
-        -Action "Completed first KAIROS workflow test" `
+        -Action "Completed first VESPERA workflow test" `
         -PermissionLevel 2 `
         -Status "Approved" `
         -Notes "run-first-workflow-test.ps1 completed." `
@@ -171,7 +171,7 @@ Assert-Path "Audit Log" $AuditLog
 Step-Title "Final Summary"
 
 if ($fail -eq 0) {
-    Write-Host "[SUCCESS] KAIROS first workflow test completed." -ForegroundColor Green
+    Write-Host "[SUCCESS] VESPERA first workflow test completed." -ForegroundColor Green
     Write-Host ""
     Write-Host "Verified:" -ForegroundColor Cyan
     Write-Host "- Healthcheck"

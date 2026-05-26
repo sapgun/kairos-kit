@@ -1,4 +1,4 @@
-﻿# KAIROS - healthcheck.ps1
+# VESPERA - healthcheck.ps1
 # Basic environment and folder check
 
 param(
@@ -7,15 +7,15 @@ param(
 )
 
 if ([string]::IsNullOrWhiteSpace($VaultPath)) {
-    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\KAIROS_Vault"
+    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\VESPERA_Vault"
 }
 
 if ([string]::IsNullOrWhiteSpace($AssetPath)) {
-    $AssetPath = "D:\KAIROS_ASSET_LIBRARY"
+    $AssetPath = "D:\VESPERA_ASSET_LIBRARY"
 }
 
 Write-Host ""
-Write-Host "KAIROS Healthcheck" -ForegroundColor Cyan
+Write-Host "VESPERA Healthcheck" -ForegroundColor Cyan
 Write-Host "==================" -ForegroundColor Cyan
 Write-Host ""
 

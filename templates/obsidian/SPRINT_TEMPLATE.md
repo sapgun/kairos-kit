@@ -1,4 +1,4 @@
-﻿# Aether Crew Lite - Sprint Template
+# Aether Crew Lite - Sprint Template
 
 **Sprint 기간**: 
 **Sprint Goal**:

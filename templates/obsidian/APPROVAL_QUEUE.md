@@ -1,4 +1,4 @@
-﻿# KAIROS Approval Queue
+# VESPERA Approval Queue
 
 ## Pending Approvals
 (여기에 AI가 제안한 Level 2 이상 작업이 기록됩니다)

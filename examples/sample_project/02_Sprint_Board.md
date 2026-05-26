@@ -1,6 +1,6 @@
-﻿# Sprint Board (현재 스프린트)
+# Sprint Board (현재 스프린트)
 
-**Sprint Goal**: KAIROS kit v0.1 완성하고 직접 사용해보기
+**Sprint Goal**: VESPERA kit v0.1 완성하고 직접 사용해보기
 
 ### Done
 - Vault 구조 생성

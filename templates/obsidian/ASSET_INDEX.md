@@ -1,4 +1,4 @@
-﻿# KAIROS Asset Index
+# VESPERA Asset Index
 
 **마지막 업데이트**: $(Get-Date -Format "yyyy-MM-dd")
 

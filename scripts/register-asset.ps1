@@ -1,10 +1,10 @@
-﻿# KAIROS - register-asset.ps1
+# VESPERA - register-asset.ps1
 # Register files from Asset Library Pending_Review into Obsidian Asset Index.
 # This script does NOT rename, move, delete, publish, or share files.
 # It only creates pending records for human review.
 
 param(
-    [string]$AssetPath = "D:\KAIROS_ASSET_LIBRARY",
+    [string]$AssetPath = "D:\VESPERA_ASSET_LIBRARY",
     [string]$VaultPath = "",
     [string]$Project = "Unassigned",
     [string]$AssetType = "Asset",
@@ -13,7 +13,7 @@ param(
 )
 
 if ([string]::IsNullOrWhiteSpace($VaultPath)) {
-    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\KAIROS_Vault"
+    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\VESPERA_Vault"
 }
 
 $PendingPath = Join-Path $AssetPath "00_Inbox\Pending_Review"
@@ -22,7 +22,7 @@ $AssetIndexFile = Join-Path $AssetIndexDir "ASSET_INDEX.md"
 $ApprovalQueueFile = Join-Path $VaultPath "APPROVAL_QUEUE.md"
 
 Write-Host ""
-Write-Host "KAIROS Asset Registration" -ForegroundColor Cyan
+Write-Host "VESPERA Asset Registration" -ForegroundColor Cyan
 Write-Host "=========================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -40,9 +40,9 @@ New-Item -ItemType Directory -Force -Path $AssetIndexDir | Out-Null
 
 if (-not (Test-Path $AssetIndexFile)) {
     @"
-# KAIROS Asset Index
+# VESPERA Asset Index
 
-This file tracks assets registered from the KAIROS Asset Library.
+This file tracks assets registered from the VESPERA Asset Library.
 
 ## Pending Assets
 
@@ -53,7 +53,7 @@ This file tracks assets registered from the KAIROS Asset Library.
 
 if (-not (Test-Path $ApprovalQueueFile)) {
     @"
-# KAIROS Approval Queue
+# VESPERA Approval Queue
 
 ## Pending Approvals
 

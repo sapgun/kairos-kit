@@ -1,10 +1,10 @@
-﻿# KAIROS Roadmap
+# VESPERA Roadmap
 
 ## v0.1 — Manual Operating Kit
 
 Goal:
 
-Use KAIROS manually with Obsidian + Asset Library + Permission Matrix.
+Use VESPERA manually with Obsidian + Asset Library + Permission Matrix.
 
 Done when:
 
@@ -72,7 +72,7 @@ Planned:
 
 ---
 
-## v0.5 — KAIROS Console
+## v0.5 — VESPERA Console
 
 Goal:
 

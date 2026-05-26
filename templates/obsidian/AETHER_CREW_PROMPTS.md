@@ -1,4 +1,4 @@
-﻿# Aether Crew Lite - Agent Prompts (사용법)
+# Aether Crew Lite - Agent Prompts (사용법)
 
 ## Product Owner Agent
 역할: 제품 전략과 백로그 우선순위 결정

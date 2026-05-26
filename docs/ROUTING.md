@@ -1,6 +1,6 @@
-﻿# KAIROS Routing
+# VESPERA Routing
 
-KAIROS uses manual-first routing in v0.1.
+VESPERA uses manual-first routing in v0.1.
 
 The router does not execute AI tools.  
 It only recommends:
@@ -29,7 +29,7 @@ Routing Philosophy
 
 AI tools are workers, not owners.
 
-KAIROS decides:
+VESPERA decides:
 
 Who should handle the task
 Who should review it

@@ -1,4 +1,4 @@
-﻿import argparse
+import argparse
 from pathlib import Path
 
 from router import route_task
@@ -28,7 +28,7 @@ def cmd_healthcheck(args):
     fail = 0
 
     print()
-    print("KAIROS Core Healthcheck")
+    print("VESPERA Core Healthcheck")
     print("=======================")
     print()
 
@@ -58,7 +58,7 @@ def cmd_route(args):
     result = route_task(args.task)
 
     print()
-    print("KAIROS Core Router")
+    print("VESPERA Core Router")
     print("==================")
     print()
     print(f"Task: {args.task}")
@@ -91,7 +91,7 @@ def cmd_log_task(args):
     route = result["route"]
 
     print()
-    print("KAIROS Core Task Intake")
+    print("VESPERA Core Task Intake")
     print("=======================")
     print()
     print(f"[OK] Task note created -> {result['note_file']}")
@@ -130,7 +130,7 @@ def cmd_audit(args):
     )
 
     print()
-    print("KAIROS Core Audit")
+    print("VESPERA Core Audit")
     print("=================")
     print()
     print(f"[OK] Audit entry written -> {audit_file}")
@@ -141,13 +141,13 @@ def cmd_audit(args):
 
 def build_parser():
     parser = argparse.ArgumentParser(
-        prog="kairos",
-        description="KAIROS Core CLI - local-first AI operations kit",
+        prog="vespera",
+        description="VESPERA Core CLI - local-first AI operations kit",
     )
 
     sub = parser.add_subparsers(dest="command", required=True)
 
-    health = sub.add_parser("healthcheck", help="Run KAIROS core healthcheck")
+    health = sub.add_parser("healthcheck", help="Run VESPERA core healthcheck")
     health.add_argument("--vault", default="")
     health.add_argument("--assets", default="")
     health.set_defaults(func=cmd_healthcheck)

@@ -1,11 +1,11 @@
-﻿# KAIROS - create-vault.ps1
+# VESPERA - create-vault.ps1
 # Obsidian Vault 자동 생성 스크립트
 
 param(
-    [string]$VaultPath = "C:\Users\$env:USERNAME\ObsidianVaults\KAIROS_Vault"
+    [string]$VaultPath = "C:\Users\$env:USERNAME\ObsidianVaults\VESPERA_Vault"
 )
 
-Write-Host "🚀 KAIROS Vault 생성 시작..." -ForegroundColor Green
+Write-Host "🚀 VESPERA Vault 생성 시작..." -ForegroundColor Green
 
 $folders = @(
     "00_Inbox",
@@ -34,16 +34,16 @@ if (Test-Path $templatePath) {
 }
 
 # 기본 원칙 파일이 없으면 생성
-if (-not (Test-Path "$VaultPath\KAIROS_PRINCIPLES.md")) {
+if (-not (Test-Path "$VaultPath\VESPERA_PRINCIPLES.md")) {
     @"
-# KAIROS Principles
+# VESPERA Principles
 
 AI tools are workers, not owners.
 Markdown is the source of truth.
 Final authority belongs to the user.
-"@ | Out-File "$VaultPath\KAIROS_PRINCIPLES.md" -Encoding utf8
+"@ | Out-File "$VaultPath\VESPERA_PRINCIPLES.md" -Encoding utf8
 }
 
-Write-Host "✅ KAIROS Vault 생성 완료!" -ForegroundColor Green
+Write-Host "✅ VESPERA Vault 생성 완료!" -ForegroundColor Green
 Write-Host "   경로: $VaultPath" -ForegroundColor Cyan
 Write-Host "   Obsidian에서 이 폴더를 Vault로 열어주세요." -ForegroundColor Cyan

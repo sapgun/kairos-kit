@@ -1,6 +1,6 @@
-﻿# KAIROS Task Intake
+# VESPERA Task Intake
 
-Task Intake is the first step of the KAIROS workflow.
+Task Intake is the first step of the VESPERA workflow.
 
 It turns a raw task into a structured record.
 
@@ -25,7 +25,7 @@ Tasks may be scattered across:
 - n8n workflows
 - Telegram or Slack messages
 
-KAIROS uses Task Intake to create a single starting point.
+VESPERA uses Task Intake to create a single starting point.
 
 ---
 
@@ -36,7 +36,7 @@ KAIROS uses Task Intake to create a single starting point.
 
 This creates a markdown note in:
 
-KAIROS_Vault/00_Inbox/
+VESPERA_Vault/00_Inbox/
 What It Records
 Raw task
 Route type
@@ -52,7 +52,7 @@ If permission level is 2 or higher, the task is also added to:
 
 APPROVAL_QUEUE.md
 
-This follows the KAIROS human-in-the-loop principle.
+This follows the VESPERA human-in-the-loop principle.
 
 Example
 .\scripts\log-task.ps1 -Task "새 썸네일 이미지를 프로젝트 폴더로 옮기고 싶어" -Project Aether_Crew_Lite

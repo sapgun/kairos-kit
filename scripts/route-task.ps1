@@ -1,4 +1,4 @@
-﻿# KAIROS - route-task.ps1
+# VESPERA - route-task.ps1
 # Manual-first task router.
 # This script does NOT call external AI tools.
 # It only recommends owner, reviewer, permission level, and suggested prompt.
@@ -9,7 +9,7 @@ param(
 )
 
 Write-Host ""
-Write-Host "KAIROS Task Router" -ForegroundColor Cyan
+Write-Host "VESPERA Task Router" -ForegroundColor Cyan
 Write-Host "==================" -ForegroundColor Cyan
 Write-Host ""
 

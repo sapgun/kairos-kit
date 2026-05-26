@@ -1,7 +1,7 @@
-﻿# KAIROS Setup Guide
+# VESPERA Setup Guide
 
 ## 1. 설치
 ```powershell
-cd D:\KAIROS-KIT
+cd D:\VESPERA-KIT
 .\scripts\install.ps1
-C:\Users\pro\ObsidianVaults\KAIROS_Vault
+C:\Users\pro\ObsidianVaults\VESPERA_Vault

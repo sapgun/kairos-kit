@@ -1,4 +1,4 @@
-﻿# KAIROS - write-audit-log.ps1
+# VESPERA - write-audit-log.ps1
 # Write a manual audit log entry into the Obsidian Vault.
 # This script does not execute external actions.
 
@@ -20,7 +20,7 @@ param(
 )
 
 if ([string]::IsNullOrWhiteSpace($VaultPath)) {
-    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\KAIROS_Vault"
+    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\VESPERA_Vault"
 }
 
 $AuditFile = Join-Path $VaultPath "AUDIT_LOG.md"
@@ -32,7 +32,7 @@ if (-not (Test-Path $VaultPath)) {
 
 if (-not (Test-Path $AuditFile)) {
     @"
-# KAIROS Audit Log
+# VESPERA Audit Log
 
 This file records important actions, approvals, decisions, and workflow events.
 
@@ -53,7 +53,7 @@ $line = "| $timestamp | $safeProject | $safeActor | $safeAction | Level $Permiss
 Add-Content -Encoding utf8 -Path $AuditFile -Value $line
 
 Write-Host ""
-Write-Host "KAIROS Audit Log" -ForegroundColor Cyan
+Write-Host "VESPERA Audit Log" -ForegroundColor Cyan
 Write-Host "================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "[OK] Audit entry written:" -ForegroundColor Green

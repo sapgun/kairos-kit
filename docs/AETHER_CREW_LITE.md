@@ -1,6 +1,6 @@
-﻿# Aether Crew Lite
+# Aether Crew Lite
 
-Aether Crew Lite is the project management and development squad module inside KAIROS.
+Aether Crew Lite is the project management and development squad module inside VESPERA.
 
 It is designed for:
 
@@ -30,10 +30,10 @@ Aether Crew Lite helps structure the full project lifecycle:
 
 ---
 
-## Relationship with KAIROS
+## Relationship with VESPERA
 
 ```txt
-KAIROS
+VESPERA
   └── Aether Crew Lite
         ├── PO Agent
         ├── Scrum Master Agent
@@ -43,7 +43,7 @@ KAIROS
         └── Hermes Agent
 ```
 
-KAIROS is the operating system.  
+VESPERA is the operating system.  
 Aether Crew Lite is the project squad.
 
 ---
@@ -141,6 +141,6 @@ Future versions may include:
 
 ## Current Status
 
-Aether Crew Lite is currently a manual project template inside KAIROS v0.1.
+Aether Crew Lite is currently a manual project template inside VESPERA v0.1.
 
 It is not a fully autonomous multi-agent runtime yet.

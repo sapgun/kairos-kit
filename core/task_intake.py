@@ -1,4 +1,4 @@
-﻿from datetime import datetime
+from datetime import datetime
 from pathlib import Path
 
 from router import route_task
@@ -22,7 +22,7 @@ def _ensure_approval_queue(vault: Path) -> Path:
 
     if not approval_file.exists():
         approval_file.write_text(
-            "# KAIROS Approval Queue\n\n"
+            "# VESPERA Approval Queue\n\n"
             "## Pending Approvals\n\n"
             "| Date | Approval ID | Project | Action | Level | Status | Notes |\n"
             "|---|---|---|---|---|---|---|\n\n"
@@ -101,7 +101,7 @@ created: {today}
 
 ## Notes
 
-This task was logged by KAIROS Core CLI.
+This task was logged by VESPERA Core CLI.
 
 No external AI tools were called.
 No file was moved, renamed, deleted, published, or shared.
@@ -118,7 +118,7 @@ No file was moved, renamed, deleted, published, or shared.
 
         approval_line = (
             f"| {today} | {approval_id} | {project} | Review task: {task.replace('|', '-')} | "
-            f"Level {result.permission_level} | Pending | Logged from KAIROS Core Task Intake. |\n"
+            f"Level {result.permission_level} | Pending | Logged from VESPERA Core Task Intake. |\n"
         )
 
         with approval_file.open("a", encoding="utf-8") as f:

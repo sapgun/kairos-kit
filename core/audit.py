@@ -1,4 +1,4 @@
-﻿from datetime import datetime
+from datetime import datetime
 from pathlib import Path
 
 def write_audit_log(
@@ -18,7 +18,7 @@ def write_audit_log(
 
     if not audit_file.exists():
         audit_file.write_text(
-            "# KAIROS Audit Log\n\n"
+            "# VESPERA Audit Log\n\n"
             "| Timestamp | Project | Actor | Action | Permission Level | Status | Notes |\n"
             "|---|---|---|---|---|---|---|\n",
             encoding="utf-8",

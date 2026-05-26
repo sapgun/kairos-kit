@@ -1,4 +1,4 @@
-﻿---
+---
 type: task_intake
 status: pending
 project:

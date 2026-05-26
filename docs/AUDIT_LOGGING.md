@@ -1,6 +1,6 @@
-﻿# KAIROS Audit Logging
+# VESPERA Audit Logging
 
-Audit Log is the accountability layer of KAIROS.
+Audit Log is the accountability layer of VESPERA.
 
 It records important workflow events so the user can understand:
 
@@ -15,7 +15,7 @@ It records important workflow events so the user can understand:
 
 ## Why Audit Logging Matters
 
-KAIROS is human-controlled.
+VESPERA is human-controlled.
 
 AI tools may suggest, summarize, draft, route, or prepare work.
 

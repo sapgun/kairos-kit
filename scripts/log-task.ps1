@@ -1,4 +1,4 @@
-﻿# KAIROS - log-task.ps1
+# VESPERA - log-task.ps1
 # Create a task intake note in Obsidian.
 # This script does not call external AI tools.
 # It only classifies, recommends, and logs the task.
@@ -13,7 +13,7 @@ param(
 )
 
 if ([string]::IsNullOrWhiteSpace($VaultPath)) {
-    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\KAIROS_Vault"
+    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\VESPERA_Vault"
 }
 
 $InboxPath = Join-Path $VaultPath "00_Inbox"
@@ -181,13 +181,13 @@ $($matched.prompt)
 
 ## Notes
 
-This task was logged by KAIROS log-task.ps1.
+This task was logged by VESPERA log-task.ps1.
 No external AI tools were called.
 No file was moved, renamed, deleted, published, or shared.
 "@ | Out-File -Encoding utf8 $noteFile
 
 Write-Host ""
-Write-Host "KAIROS Task Logged" -ForegroundColor Cyan
+Write-Host "VESPERA Task Logged" -ForegroundColor Cyan
 Write-Host "==================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "[OK] Task note created:" -ForegroundColor Green
@@ -203,7 +203,7 @@ Write-Host ""
 if ($matched.level -ge 2) {
     if (-not (Test-Path $ApprovalQueueFile)) {
         @"
-# KAIROS Approval Queue
+# VESPERA Approval Queue
 
 ## Pending Approvals
 

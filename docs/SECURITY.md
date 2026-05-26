@@ -1,4 +1,4 @@
-﻿KAIROS Security Principles
+VESPERA Security Principles
 절대 금지
 
 seed phrase, private key 저장

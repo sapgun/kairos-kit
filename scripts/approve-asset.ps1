@@ -1,4 +1,4 @@
-﻿# KAIROS - approve-asset.ps1
+# VESPERA - approve-asset.ps1
 # Approve and move a pending asset after explicit human confirmation.
 
 param(
@@ -17,7 +17,7 @@ param(
 )
 
 if ([string]::IsNullOrWhiteSpace($VaultPath)) {
-    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\KAIROS_Vault"
+    $VaultPath = Join-Path $env:USERPROFILE "ObsidianVaults\VESPERA_Vault"
 }
 
 $ApprovalQueueFile = Join-Path $VaultPath "APPROVAL_QUEUE.md"
@@ -25,7 +25,7 @@ $AssetIndexDir = Join-Path $VaultPath "10_Asset_Index"
 $AssetIndexFile = Join-Path $AssetIndexDir "ASSET_INDEX.md"
 
 Write-Host ""
-Write-Host "KAIROS Asset Approval" -ForegroundColor Cyan
+Write-Host "VESPERA Asset Approval" -ForegroundColor Cyan
 Write-Host "=====================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -44,7 +44,7 @@ New-Item -ItemType Directory -Force -Path $AssetIndexDir | Out-Null
 
 if (-not (Test-Path $ApprovalQueueFile)) {
     @"
-# KAIROS Approval Queue
+# VESPERA Approval Queue
 
 ## Pending Approvals
 
@@ -59,7 +59,7 @@ if (-not (Test-Path $ApprovalQueueFile)) {
 
 if (-not (Test-Path $AssetIndexFile)) {
     @"
-# KAIROS Asset Index
+# VESPERA Asset Index
 
 ## Pending Assets
 

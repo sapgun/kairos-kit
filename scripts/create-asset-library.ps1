@@ -1,11 +1,11 @@
-﻿# KAIROS - create-asset-library.ps1
+# VESPERA - create-asset-library.ps1
 # Asset Library 자동 생성 스크립트
 
 param(
-    [string]$AssetPath = "D:\KAIROS_ASSET_LIBRARY"
+    [string]$AssetPath = "D:\VESPERA_ASSET_LIBRARY"
 )
 
-Write-Host "🚀 KAIROS Asset Library 생성 시작..." -ForegroundColor Green
+Write-Host "🚀 VESPERA Asset Library 생성 시작..." -ForegroundColor Green
 
 $folders = @(
     "00_Inbox\Pending_Review",
@@ -32,6 +32,6 @@ foreach ($folder in $folders) {
     New-Item -Path "$AssetPath\$folder" -ItemType Directory -Force | Out-Null
 }
 
-Write-Host "✅ KAIROS Asset Library 생성 완료!" -ForegroundColor Green
+Write-Host "✅ VESPERA Asset Library 생성 완료!" -ForegroundColor Green
 Write-Host "   경로: $AssetPath" -ForegroundColor Cyan
 Write-Host "   파일명 규칙: YYYYMMDD_ProjectName_AssetType_Tool_Version_Status.ext" -ForegroundColor Cyan

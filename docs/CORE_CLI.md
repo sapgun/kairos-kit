@@ -1,10 +1,10 @@
-﻿
+
 ---
 
 ## Log Task
 
 ```powershell
-py .\core\kairos.py log-task "새 썸네일 이미지 파일을 프로젝트 폴더로 옮기고 싶어" --project Aether_Crew_Lite
+py .\core\VESPERA.py log-task "새 썸네일 이미지 파일을 프로젝트 폴더로 옮기고 싶어" --project Aether_Crew_Lite
 
 This command:
 

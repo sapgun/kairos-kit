@@ -1,8 +1,8 @@
-﻿# KAIROS Quickstart
+# VESPERA Quickstart
 
-This guide helps you set up KAIROS in 5 minutes.
+This guide helps you set up VESPERA in 5 minutes.
 
-KAIROS v0.1 is a manual-first local AI operations kit.
+VESPERA v0.1 is a manual-first local AI operations kit.
 
 It helps you create:
 
@@ -20,15 +20,15 @@ It helps you create:
 ## 1. Clone the repository
 
 ```powershell
-git clone https://github.com/sapgun/kairos-kit.git
-cd kairos-kit
+git clone https://github.com/sapgun/VESPERA-kit.git
+cd VESPERA-kit
 2. Run installer
 .\scripts\install.ps1
 
 This creates:
 
-C:\Users\<YOUR_NAME>\ObsidianVaults\KAIROS_Vault
-D:\KAIROS_ASSET_LIBRARY
+C:\Users\<YOUR_NAME>\ObsidianVaults\VESPERA_Vault
+D:\VESPERA_ASSET_LIBRARY
 3. Open Obsidian Vault
 
 Open Obsidian.
@@ -39,7 +39,7 @@ Open folder as vault
 
 Select:
 
-C:\Users\<YOUR_NAME>\ObsidianVaults\KAIROS_Vault
+C:\Users\<YOUR_NAME>\ObsidianVaults\VESPERA_Vault
 
 You should see:
 
@@ -47,9 +47,9 @@ You should see:
 01_Projects
 05_AI_Workflows
 10_Asset_Index
-KAIROS_PRINCIPLES.md
+VESPERA_PRINCIPLES.md
 AI_TEAM_ROLES.md
-KAIROS_PERMISSION_MATRIX.md
+VESPERA_PERMISSION_MATRIX.md
 APPROVAL_QUEUE.md
 ASSET_INDEX.md
 4. Run healthcheck
@@ -66,7 +66,7 @@ They are optional tools for future versions.
 
 Create a test file:
 
-New-Item -ItemType File -Force -Path "D:\KAIROS_ASSET_LIBRARY\00_Inbox\Pending_Review\test-thumbnail.png"
+New-Item -ItemType File -Force -Path "D:\VESPERA_ASSET_LIBRARY\00_Inbox\Pending_Review\test-thumbnail.png"
 
 Register it:
 
@@ -118,7 +118,7 @@ Add one real task to the backlog.
 8. Record decision in Decision Log
 Current Limitations
 
-KAIROS v0.1 does not yet include:
+VESPERA v0.1 does not yet include:
 
 AI Router CLI
 Real n8n execution
@@ -133,7 +133,7 @@ v0.1 is designed to be used manually first.
 
 ## 9. First Complete Manual Workflow
 
-After installation, you can test the full KAIROS v0.1 loop.
+After installation, you can test the full VESPERA v0.1 loop.
 
 ### Step 1 — Log a task
 
@@ -142,17 +142,17 @@ After installation, you can test the full KAIROS v0.1 loop.
 Step 2 — Route the task
 .\scripts\route-task.ps1 -Task "새 썸네일 이미지 파일을 프로젝트 폴더로 옮기고 싶어"
 Step 3 — Create a test asset
-New-Item -ItemType File -Force -Path "D:\KAIROS_ASSET_LIBRARY\00_Inbox\Pending_Review\test-thumbnail.png"
+New-Item -ItemType File -Force -Path "D:\VESPERA_ASSET_LIBRARY\00_Inbox\Pending_Review\test-thumbnail.png"
 Step 4 — Register the asset
 .\scripts\register-asset.ps1 -Project Aether_Crew_Lite -AssetType Thumbnail -Tool ChatGPT
 Step 5 — Approve the asset
-.\scripts\approve-asset.ps1 -SourceFile "D:\KAIROS_ASSET_LIBRARY\00_Inbox\Pending_Review\test-thumbnail.png" -DestinationFolder "D:\KAIROS_ASSET_LIBRARY\01_Projects\Aether_Crew_Lite\02_Images" -NewFileName "20260516_AetherCrew_Thumbnail_ChatGPT_v01_Approved.png" -Project "Aether_Crew_Lite"
+.\scripts\approve-asset.ps1 -SourceFile "D:\VESPERA_ASSET_LIBRARY\00_Inbox\Pending_Review\test-thumbnail.png" -DestinationFolder "D:\VESPERA_ASSET_LIBRARY\01_Projects\Aether_Crew_Lite\02_Images" -NewFileName "20260516_AetherCrew_Thumbnail_ChatGPT_v01_Approved.png" -Project "Aether_Crew_Lite"
 
 When prompted, type:
 
 APPROVE
 Step 6 — Write audit log
-.\scripts\write-audit-log.ps1 -Project Aether_Crew_Lite -Action "Completed first KAIROS asset approval workflow" -PermissionLevel 2 -Status "Approved" -Notes "Manual test completed."
+.\scripts\write-audit-log.ps1 -Project Aether_Crew_Lite -Action "Completed first VESPERA asset approval workflow" -PermissionLevel 2 -Status "Approved" -Notes "Manual test completed."
 Step 7 — Verify in Obsidian
 
 Check:
@@ -162,13 +162,13 @@ Check:
 APPROVAL_QUEUE.md
 AUDIT_LOG.md
 
-If all files were updated, KAIROS v0.1 is working.
+If all files were updated, VESPERA v0.1 is working.
 
 ---
 
 ## First Workflow Test Script
 
-KAIROS includes a full workflow test script:
+VESPERA includes a full workflow test script:
 
 ```powershell
 .\scripts\run-first-workflow-test.ps1
@@ -191,5 +191,5 @@ APPROVE
 
 Expected final output:
 
-[SUCCESS] KAIROS first workflow test completed.
+[SUCCESS] VESPERA first workflow test completed.
 

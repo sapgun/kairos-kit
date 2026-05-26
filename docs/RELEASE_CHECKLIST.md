@@ -1,4 +1,4 @@
-﻿# KAIROS Release Checklist
+# VESPERA Release Checklist
 
 Use this checklist before creating a GitHub release.
 
@@ -65,11 +65,11 @@ Use this checklist before creating a GitHub release.
 ## Release Notes Template
 
 ```md
-# KAIROS v0.1.0-alpha
+# VESPERA v0.1.0-alpha
 
-First public alpha release of KAIROS.
+First public alpha release of VESPERA.
 
-KAIROS is a local-first AI operations kit for owning your knowledge, assets, approvals, and multi-AI workflow.
+VESPERA is a local-first AI operations kit for owning your knowledge, assets, approvals, and multi-AI workflow.
 
 ## Included
 

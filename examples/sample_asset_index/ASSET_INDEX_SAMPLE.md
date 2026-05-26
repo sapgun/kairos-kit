@@ -1,7 +1,7 @@
-﻿
+
 Sample Asset Index
 
-This is an example of how KAIROS tracks generated assets.
+This is an example of how VESPERA tracks generated assets.
 
 Project
 
@@ -30,4 +30,4 @@ Naming Rule
 YYYYMMDD_ProjectName_AssetType_Tool_Version_Status.ext
 Notes
 
-KAIROS should not automatically rename, move, delete, publish, or share assets without human approval.
+VESPERA should not automatically rename, move, delete, publish, or share assets without human approval.

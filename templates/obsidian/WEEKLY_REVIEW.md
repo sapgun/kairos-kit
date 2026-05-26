@@ -1,6 +1,6 @@
-﻿# Weekly Review - $(Get-Date -Format "yyyy-MM-dd")
+# Weekly Review - $(Get-Date -Format "yyyy-MM-dd")
 
-**이번 주 KAIROS 요약**
+**이번 주 VESPERA 요약**
 - Approval Queue 처리: 
 - Asset Library에 추가된 파일: 
 - 완료된 프로젝트 작업: 

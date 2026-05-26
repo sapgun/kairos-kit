@@ -1,4 +1,4 @@
-﻿# Aether Crew Lite - Project Brief
+# Aether Crew Lite - Project Brief
 
 **프로젝트명**: 
 **시작일**: 

@@ -1,4 +1,4 @@
-﻿# KAIROS AI Team Roles
+# VESPERA AI Team Roles
 
 chatgpt:
   role: Chief Product & Strategy Officer

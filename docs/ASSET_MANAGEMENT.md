@@ -1,12 +1,12 @@
-﻿# KAIROS Asset Management
+# VESPERA Asset Management
 
-KAIROS treats AI-generated assets as first-class project memory.
+VESPERA treats AI-generated assets as first-class project memory.
 
 AI tools can generate images, videos, infographics, documents, pitch decks, and design files, but they should not become the final storage location.
 
 The rule is simple:
 
-> Generate anywhere. Recover into KAIROS. Index in Obsidian.
+> Generate anywhere. Recover into VESPERA. Index in Obsidian.
 
 ---
 
@@ -37,7 +37,7 @@ Without a unified asset system, it becomes difficult to know:
 - Which file was already published
 - Which file is still a draft
 
-KAIROS solves this with a structured Asset Library and Obsidian-based indexing.
+VESPERA solves this with a structured Asset Library and Obsidian-based indexing.
 
 ---
 
@@ -45,7 +45,7 @@ KAIROS solves this with a structured Asset Library and Obsidian-based indexing.
 
 AI tools are generation engines, not asset storage systems.
 
-KAIROS Asset Library is the source of truth for generated files.
+VESPERA Asset Library is the source of truth for generated files.
 
 Obsidian stores metadata, meaning, usage context, and status.
 
@@ -54,7 +54,7 @@ Obsidian stores metadata, meaning, usage context, and status.
 ## Standard Asset Library Structure
 
 ```txt
-KAIROS_ASSET_LIBRARY/
+VESPERA_ASSET_LIBRARY/
   00_Inbox/
     Pending_Review/
     Approved_To_Move/
@@ -80,7 +80,7 @@ KAIROS_ASSET_LIBRARY/
   90_Metadata/
   99_Archive/
 
-Set-Location "D:\KAIROS-KIT"
+Set-Location "D:\VESPERA-KIT"
 
 # Ensure folders exist
 New-Item -ItemType Directory -Force -Path "docs" | Out-Null
@@ -90,15 +90,15 @@ New-Item -ItemType Directory -Force -Path "examples\sample_asset_index" | Out-Nu
 
 # docs/ASSET_MANAGEMENT.md
 @'
-# KAIROS Asset Management
+# VESPERA Asset Management
 
-KAIROS treats AI-generated assets as first-class project memory.
+VESPERA treats AI-generated assets as first-class project memory.
 
 AI tools can generate images, videos, infographics, documents, pitch decks, and design files, but they should not become the final storage location.
 
 The rule is simple:
 
-> Generate anywhere. Recover into KAIROS. Index in Obsidian.
+> Generate anywhere. Recover into VESPERA. Index in Obsidian.
 
 ---
 
@@ -129,7 +129,7 @@ Without a unified asset system, it becomes difficult to know:
 - Which file was already published
 - Which file is still a draft
 
-KAIROS solves this with a structured Asset Library and Obsidian-based indexing.
+VESPERA solves this with a structured Asset Library and Obsidian-based indexing.
 
 ---
 
@@ -137,7 +137,7 @@ KAIROS solves this with a structured Asset Library and Obsidian-based indexing.
 
 AI tools are generation engines, not asset storage systems.
 
-KAIROS Asset Library is the source of truth for generated files.
+VESPERA Asset Library is the source of truth for generated files.
 
 Obsidian stores metadata, meaning, usage context, and status.
 
@@ -146,7 +146,7 @@ Obsidian stores metadata, meaning, usage context, and status.
 ## Standard Asset Library Structure
 
 ```txt
-KAIROS_ASSET_LIBRARY/
+VESPERA_ASSET_LIBRARY/
   00_Inbox/
     Pending_Review/
     Approved_To_Move/
@@ -200,7 +200,7 @@ Recommended Workflow
 8. Mark final or published when used
 Human Approval Rule
 
-KAIROS should not automatically rename, move, delete, publish, or share assets without approval.
+VESPERA should not automatically rename, move, delete, publish, or share assets without approval.
 
 Recommended permission level:
 
@@ -231,7 +231,7 @@ tool: Kling
 status: draft
 version: v01
 storage_provider: local
-storage_path: D:/KAIROS_ASSET_LIBRARY/01_Projects/Aether_Crew_Lite/04_Videos
+storage_path: D:/VESPERA_ASSET_LIBRARY/01_Projects/Aether_Crew_Lite/04_Videos
 created: 2026-05-16
 ---
 
@@ -268,7 +268,7 @@ Use an encrypted vault for sensitive materials.
 
 ## Register Pending Assets
 
-KAIROS provides a safe registration script:
+VESPERA provides a safe registration script:
 
 ```powershell
 .\scripts\register-asset.ps1 -Project Aether_Crew_Lite -AssetType Thumbnail -Tool ChatGPT
@@ -283,7 +283,7 @@ Does not move files
 Does not delete files
 Does not publish or share files
 
-This follows the KAIROS human-in-the-loop principle.
+This follows the VESPERA human-in-the-loop principle.
 
 AI or scripts may suggest and register.
 The user approves before any high-impact action.

@@ -1,27 +1,27 @@
-﻿
-KAIROS Storage Configuration
+
+VESPERA Storage Configuration
 Choose one primary asset storage provider.
 
 asset_storage:
 provider: local
-primary_path: "D:/KAIROS_ASSET_LIBRARY"
-inbox_path: "D:/KAIROS_ASSET_LIBRARY/00_Inbox"
-pending_review_path: "D:/KAIROS_ASSET_LIBRARY/00_Inbox/Pending_Review"
-final_path: "D:/KAIROS_ASSET_LIBRARY/08_Exports/Final"
+primary_path: "D:/VESPERA_ASSET_LIBRARY"
+inbox_path: "D:/VESPERA_ASSET_LIBRARY/00_Inbox"
+pending_review_path: "D:/VESPERA_ASSET_LIBRARY/00_Inbox/Pending_Review"
+final_path: "D:/VESPERA_ASSET_LIBRARY/08_Exports/Final"
 
 Alternative examples:
 asset_storage:
 provider: google_drive
-primary_path: "G:/My Drive/KAIROS_ASSET_LIBRARY"
+primary_path: "G:/My Drive/VESPERA_ASSET_LIBRARY"
 asset_storage:
 provider: nas
-primary_path: "\NAS01\KAIROS_ASSET_LIBRARY"
+primary_path: "\NAS01\VESPERA_ASSET_LIBRARY"
 asset_storage:
 provider: external_drive
-primary_path: "E:/KAIROS_ASSET_LIBRARY"
+primary_path: "E:/VESPERA_ASSET_LIBRARY"
 
 obsidian:
-vault_path: "C:/Users/pro/ObsidianVaults/KAIROS_Vault"
+vault_path: "C:/Users/pro/ObsidianVaults/VESPERA_Vault"
 asset_index_path: "10_Asset_Index"
 
 backup:
@@ -29,7 +29,7 @@ enabled: false
 strategy: daily_zip
 providers:
 - type: local
-path: "D:/KAIROS_BACKUPS"
+path: "D:/VESPERA_BACKUPS"
 
 security:
 forbidden_patterns:

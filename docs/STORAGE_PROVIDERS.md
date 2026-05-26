@@ -1,13 +1,13 @@
-﻿
-KAIROS Storage Providers
 
-KAIROS does not require a specific storage provider.
+VESPERA Storage Providers
+
+VESPERA does not require a specific storage provider.
 
 Google Drive is optional.
 
 Users can choose where their assets live.
 
-KAIROS standardizes:
+VESPERA standardizes:
 
 Folder structure
 Metadata
@@ -33,7 +33,7 @@ Recommended Setups
 Solo Builder
 asset_storage:
   provider: local
-  primary_path: "D:/KAIROS_ASSET_LIBRARY"
+  primary_path: "D:/VESPERA_ASSET_LIBRARY"
 
 Best for:
 
@@ -43,7 +43,7 @@ Early testing
 Google Drive Setup
 asset_storage:
   provider: google_drive
-  primary_path: "G:/My Drive/KAIROS_ASSET_LIBRARY"
+  primary_path: "G:/My Drive/VESPERA_ASSET_LIBRARY"
 
 Best for:
 
@@ -59,7 +59,7 @@ Use additional backup if files are important.
 NAS Setup
 asset_storage:
   provider: nas
-  primary_path: "\\NAS01\\KAIROS_ASSET_LIBRARY"
+  primary_path: "\\NAS01\\VESPERA_ASSET_LIBRARY"
 
 Best for:
 
@@ -70,7 +70,7 @@ Small teams
 External Drive Setup
 asset_storage:
   provider: external_drive
-  primary_path: "E:/KAIROS_ASSET_LIBRARY"
+  primary_path: "E:/VESPERA_ASSET_LIBRARY"
 
 Best for:
 
@@ -80,9 +80,9 @@ Large source files
 S3-Compatible Setup
 asset_storage:
   provider: s3
-  bucket: "kairos-assets"
+  bucket: "VESPERA-assets"
   region: "ap-northeast-2"
-  local_cache: "D:/KAIROS_CACHE"
+  local_cache: "D:/VESPERA_CACHE"
 
 Best for:
 
@@ -92,7 +92,7 @@ Team storage
 Scalable archive
 Storage Independence Principle
 
-KAIROS must not depend on a single storage provider.
+VESPERA must not depend on a single storage provider.
 
 The user should be able to move from:
 
@@ -107,7 +107,7 @@ Standard Internal Structure
 
 Regardless of provider, use:
 
-KAIROS_ASSET_LIBRARY/
+VESPERA_ASSET_LIBRARY/
   00_Inbox/
   01_Projects/
   02_Content/
