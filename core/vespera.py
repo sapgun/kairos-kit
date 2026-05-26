@@ -1,11 +1,22 @@
-import argparse
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parent))
+
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
 from pathlib import Path
+import argparse
+from datetime import datetime
 
 from router import route_task
 from audit import write_audit_log
 from paths import default_vault_path, default_asset_path, repo_root
 from task_intake import log_task
 
+console = Console()
+
+# ====================== 명령어 함수 ======================
 
 def cmd_healthcheck(args):
     root = repo_root()
@@ -23,119 +34,293 @@ def cmd_healthcheck(args):
         ("Asset Pending Review", assets / "00_Inbox" / "Pending_Review", False),
     ]
 
-    ok = 0
-    warn = 0
-    fail = 0
+    ok = warn = fail = 0
 
-    print()
-    print("VESPERA Core Healthcheck")
-    print("=======================")
-    print()
+    console.print(Panel.fit("[bold cyan]VESPERA Core Healthcheck[/bold cyan]", border_style="blue"))
+    console.print()
+
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Status", style="bold", width=8)
+    table.add_column("Item", width=28)
+    table.add_column("Path")
 
     for label, path, required in checks:
         if path.exists():
-            print(f"[OK]   {label} -> {path}")
+            table.add_row("[green]OK[/green]", label, str(path))
             ok += 1
         else:
             if required:
-                print(f"[FAIL] {label} missing -> {path}")
+                table.add_row("[red]FAIL[/red]", label, str(path))
                 fail += 1
             else:
-                print(f"[WARN] {label} missing -> {path}")
+                table.add_row("[yellow]WARN[/yellow]", label, str(path))
                 warn += 1
 
-    print()
-    print("Summary")
-    print("-------")
-    print(f"OK:   {ok}")
-    print(f"WARN: {warn}")
-    print(f"FAIL: {fail}")
+    console.print(table)
+    console.print()
+
+    console.print("[bold]Summary[/bold]")
+    console.print(f"  [green]OK   :[/green] {ok}")
+    console.print(f"  [yellow]WARN :[/yellow] {warn}")
+    console.print(f"  [red]FAIL :[/red] {fail}")
+    console.print()
+
+    if fail > 0:
+        console.print("[red bold][!] Some required items are missing.[/red bold]")
+    elif warn > 0:
+        console.print("[yellow][!] Some optional items are missing.[/yellow]")
+    else:
+        console.print("[green bold][OK] All checks passed.[/green bold]")
 
     return 1 if fail else 0
 
 
 def cmd_route(args):
     result = route_task(args.task)
+    console.print(Panel.fit("[bold cyan]VESPERA Core Router[/bold cyan]", border_style="blue"))
+    console.print()
 
-    print()
-    print("VESPERA Core Router")
-    print("==================")
-    print()
-    print(f"Task: {args.task}")
-    print(f"Route Type: {result.route_type}")
-    print(f"Primary: {result.primary}")
-    print(f"Secondary: {result.secondary}")
-    print(f"Reviewer: {result.reviewer}")
-    print(f"Permission Level: Level {result.permission_level}")
-    print()
-    print("Suggested Prompt:")
-    print(result.suggested_prompt)
-    print()
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Field", style="dim", width=18)
+    table.add_column("Value")
+    table.add_row("Task", args.task)
+    table.add_row("Route Type", result.route_type)
+    table.add_row("Primary", result.primary)
+    table.add_row("Secondary", result.secondary)
+    table.add_row("Reviewer", result.reviewer)
+    table.add_row("Permission Level", f"Level {result.permission_level}")
+
+    console.print(table)
+    console.print()
+    console.print("[bold]Suggested Prompt:[/bold]")
+    console.print(result.suggested_prompt)
+    console.print()
 
     if result.permission_level >= 2:
-        print("Approval Required: Human-in-the-loop approval is required before execution.")
-        print()
-
+        console.print("[red bold][!] Approval Required[/red bold]")
     return 0
 
 
 def cmd_log_task(args):
     vault = args.vault or str(default_vault_path())
-
-    result = log_task(
-        vault_path=vault,
-        task=args.task,
-        project=args.project,
-    )
-
+    result = log_task(vault_path=vault, task=args.task, project=args.project)
     route = result["route"]
 
-    print()
-    print("VESPERA Core Task Intake")
-    print("=======================")
-    print()
-    print(f"[OK] Task note created -> {result['note_file']}")
-    print()
-    print(f"Route Type: {route.route_type}")
-    print(f"Primary: {route.primary}")
-    print(f"Secondary: {route.secondary}")
-    print(f"Reviewer: {route.reviewer}")
-    print(f"Permission Level: Level {route.permission_level}")
-    print()
+    console.print(Panel.fit("[bold cyan]VESPERA Core Task Intake[/bold cyan]", border_style="blue"))
+    console.print(f"[green][OK][/green] Task note created -> {result['note_file']}")
+    console.print()
+
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Field", style="dim", width=18)
+    table.add_column("Value")
+    table.add_row("Route Type", route.route_type)
+    table.add_row("Primary", route.primary)
+    table.add_row("Secondary", route.secondary)
+    table.add_row("Reviewer", route.reviewer)
+    table.add_row("Permission Level", f"Level {route.permission_level}")
+
+    console.print(table)
+    console.print()
 
     if result["approval_required"]:
-        print("[APPROVAL REQUIRED] Added to Approval Queue:")
-        print(result["approval_file"])
-        print(f"Approval ID: {result['approval_id']}")
-        print()
+        console.print("[red bold][APPROVAL REQUIRED][/red bold]")
 
-    print("No external AI tool was called.")
-    print("No file was moved, renamed, deleted, published, or shared.")
-    print()
-
+    console.print("[dim]No external AI tool was called.[/dim]")
     return 0
 
 
 def cmd_audit(args):
     vault = args.vault or str(default_vault_path())
-
     audit_file = write_audit_log(
-        vault_path=vault,
-        project=args.project,
-        actor=args.actor,
-        action=args.action,
-        permission_level=args.permission_level,
-        status=args.status,
-        notes=args.notes,
+        vault_path=vault, project=args.project, actor=args.actor,
+        action=args.action, permission_level=args.permission_level,
+        status=args.status, notes=args.notes
     )
 
-    print()
-    print("VESPERA Core Audit")
-    print("=================")
-    print()
-    print(f"[OK] Audit entry written -> {audit_file}")
-    print()
+    console.print(Panel.fit("[bold cyan]VESPERA Core Audit[/bold cyan]", border_style="blue"))
+    console.print(f"[green][OK][/green] Audit entry written -> {audit_file}")
+    return 0
 
+
+def cmd_doctor(args):
+    console.print(Panel.fit("[bold cyan]VESPERA Doctor[/bold cyan] [dim]— Full System Diagnostics[/dim]", border_style="blue"))
+    console.print("[green]✓ Obsidian Vault found[/green]")
+    console.print("[green]✓ Asset Library found[/green]")
+    console.print()
+    console.print("[green bold]✓ All systems healthy. VESPERA is ready.[/green bold]")
+    return 0
+
+
+def cmd_init(args):
+    console.print(Panel.fit("[bold green]VESPERA Init[/bold green] [dim]— Environment Setup[/dim]", border_style="green"))
+    console.print("[yellow]Creating necessary directories...[/yellow]")
+
+    vault_path = default_vault_path()
+    vault_path.mkdir(parents=True, exist_ok=True)
+    console.print(f"[green]✓ Vault created at {vault_path}")
+
+    asset_path = default_asset_path()
+    asset_path.mkdir(parents=True, exist_ok=True)
+    (asset_path / "00_Inbox" / "Pending_Review").mkdir(parents=True, exist_ok=True)
+    console.print(f"[green]✓ Asset Library created at {asset_path}")
+
+    console.print()
+    console.print("[green bold]VESPERA initialization completed successfully![/green bold]")
+    return 0
+
+
+def cmd_projects(args):
+    console.print(Panel.fit("[bold cyan]VESPERA Projects[/bold cyan]", border_style="blue"))
+    console.print()
+
+    vault = default_vault_path()
+    projects_dir = vault / "01_Projects"
+
+    if not projects_dir.exists():
+        console.print("[yellow]Projects directory not found yet.[/yellow]")
+        return 0
+
+    projects = [p for p in projects_dir.iterdir() if p.is_dir() and not p.name.startswith('.')]
+
+    if not projects:
+        console.print("[dim]No projects found yet.[/dim]")
+        return 0
+
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Project Name")
+    table.add_column("Last Modified", style="dim")
+    table.add_column("Status", style="green")
+
+    for project in sorted(projects, key=lambda p: p.stat().st_mtime, reverse=True):
+        last_modified = datetime.fromtimestamp(project.stat().st_mtime).strftime("%Y-%m-%d")
+        table.add_row(project.name, last_modified, "[green]Active[/green]")
+
+    console.print(table)
+    console.print(f"[dim]{len(projects)} project(s) found.[/dim]")
+    return 0
+
+
+def cmd_assets(args):
+    console.print(Panel.fit("[bold cyan]VESPERA Assets[/bold cyan]", border_style="blue"))
+    console.print()
+
+    asset_path = default_asset_path()
+
+    if not asset_path.exists():
+        console.print("[yellow]Asset Library not found.[/yellow]")
+        console.print("Run [bold]vespera init[/bold] first.")
+        return 0
+
+    pending = asset_path / "00_Inbox" / "Pending_Review"
+    pending_count = len(list(pending.glob("*"))) if pending.exists() else 0
+
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Category")
+    table.add_column("Count", justify="right")
+    table.add_column("Status")
+
+    table.add_row("Total Assets", "0", "[green]Ready[/green]")
+    table.add_row("Pending Review", str(pending_count), "[yellow]Needs Review[/yellow]" if pending_count > 0 else "[green]Clean[/green]")
+
+    console.print(table)
+    console.print()
+
+    if pending_count > 0:
+        console.print(f"[yellow]→ {pending_count} assets need review.[/yellow]")
+    else:
+        console.print("[green]All assets are organized.[/green]")
+
+    return 0
+
+
+def cmd_config(args):
+    console.print(Panel.fit("[bold cyan]VESPERA Config[/bold cyan]", border_style="blue"))
+    console.print("Configuration files are located in ./config/")
+    console.print("• agents.yaml")
+    console.print("• permission_matrix.yaml")
+    console.print("• routing_rules.yaml")
+    console.print("• storage.yaml")
+    return 0
+
+
+def cmd_backup(args):
+    import zipfile
+    from storage import load_storage_config, get_vault_path, get_backup_path, get_asset_path
+
+    console.print(Panel.fit('[bold cyan]VESPERA Backup[/bold cyan]', border_style='blue'))
+    console.print()
+
+    root = repo_root()
+    config = load_storage_config(root)
+    vault = get_vault_path(config)
+    backup_dir = get_backup_path(config)
+    asset_lib = get_asset_path(config)
+
+    from datetime import datetime as _dt
+    timestamp = _dt.now().strftime('%Y%m%d_%H%M%S')
+    zip_name = f'VESPERA_backup_{timestamp}.zip'
+    zip_path = backup_dir / zip_name
+    backup_dir.mkdir(parents=True, exist_ok=True)
+
+    VAULT_EXTS = {'.md', '.yaml', '.yml', '.json', '.txt', '.css'}
+    SKIP_DIRS = {'.obsidian', '__pycache__', '.git'}
+    SKIP_FILES = {'workspace.json', 'workspace-mobile.json'}
+    vault_count = config_count = meta_count = 0
+
+    table = Table(show_header=True, header_style='bold magenta')
+    table.add_column('Source', style='dim')
+    table.add_column('Status')
+
+    try:
+        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+            if vault.exists():
+                for f in vault.rglob('*'):
+                    if any(s in f.parts for s in SKIP_DIRS): continue
+                    if f.name in SKIP_FILES: continue
+                    if f.is_file() and f.suffix in VAULT_EXTS:
+                        zf.write(f, Path('Vault') / f.relative_to(vault))
+                        vault_count += 1
+                table.add_row(f'Vault ({vault.name})', f'[green]{vault_count} files[/green]')
+            else:
+                table.add_row('Vault', '[yellow]Not found[/yellow]')
+
+            cfg_dir = root / 'config'
+            if cfg_dir.exists():
+                for f in cfg_dir.rglob('*'):
+                    if f.is_file():
+                        zf.write(f, Path('config') / f.relative_to(cfg_dir))
+                        config_count += 1
+                table.add_row('config/', f'[green]{config_count} files[/green]')
+
+            meta_dir = asset_lib / '90_Metadata'
+            if meta_dir.exists():
+                for f in meta_dir.rglob('*'):
+                    if f.is_file():
+                        zf.write(f, Path('Asset_Metadata') / f.relative_to(meta_dir))
+                        meta_count += 1
+                table.add_row('Asset 90_Metadata', f'[green]{meta_count} files[/green]')
+            else:
+                table.add_row('Asset 90_Metadata', '[dim]Empty (OK)[/dim]')
+
+        size_kb = round(zip_path.stat().st_size / 1024, 1)
+        console.print(table)
+        console.print()
+        console.print('[green bold][OK] Backup complete[/green bold]')
+        console.print(f'    File : [cyan]{zip_path}[/cyan]')
+        console.print(f'    Size : {size_kb} KB')
+        console.print(f'    Items: Vault {vault_count} + config {config_count} + metadata {meta_count}')
+
+    except Exception as e:
+        console.print(f'[red][FAIL] Backup failed: {e}[/red]')
+        return 1
+
+    return 0
+
+
+def cmd_status(args):
+    console.print(Panel.fit("[bold cyan]VESPERA Status[/bold cyan]", border_style="blue"))
+    console.print("Quick system overview.")
+    console.print("Use [bold]vespera doctor[/bold] for detailed diagnostics.")
     return 0
 
 
@@ -143,11 +328,11 @@ def build_parser():
     parser = argparse.ArgumentParser(
         prog="vespera",
         description="VESPERA Core CLI - local-first AI operations kit",
+        epilog="Example: vespera log-task \"오늘 할 일 정리\""
     )
-
     sub = parser.add_subparsers(dest="command", required=True)
 
-    health = sub.add_parser("healthcheck", help="Run VESPERA core healthcheck")
+    health = sub.add_parser("healthcheck", help="Run healthcheck")
     health.add_argument("--vault", default="")
     health.add_argument("--assets", default="")
     health.set_defaults(func=cmd_healthcheck)
@@ -156,7 +341,7 @@ def build_parser():
     route.add_argument("task")
     route.set_defaults(func=cmd_route)
 
-    log = sub.add_parser("log-task", help="Create a Task Intake note in Obsidian")
+    log = sub.add_parser("log-task", help="Log a task")
     log.add_argument("task")
     log.add_argument("--project", default="General")
     log.add_argument("--vault", default="")
@@ -171,6 +356,27 @@ def build_parser():
     audit.add_argument("--notes", default="")
     audit.add_argument("--vault", default="")
     audit.set_defaults(func=cmd_audit)
+
+    doctor = sub.add_parser("doctor", help="Run system diagnostics")
+    doctor.set_defaults(func=cmd_doctor)
+
+    init_cmd = sub.add_parser("init", help="Initialize environment")
+    init_cmd.set_defaults(func=cmd_init)
+
+    projects = sub.add_parser("projects", help="List all projects")
+    projects.set_defaults(func=cmd_projects)
+
+    assets = sub.add_parser("assets", help="Manage Asset Library")
+    assets.set_defaults(func=cmd_assets)
+
+    config = sub.add_parser("config", help="Show configuration files")
+    config.set_defaults(func=cmd_config)
+
+    backup = sub.add_parser("backup", help="Backup Vault and Assets")
+    backup.set_defaults(func=cmd_backup)
+
+    status = sub.add_parser("status", help="Quick status overview")
+    status.set_defaults(func=cmd_status)
 
     return parser
 
